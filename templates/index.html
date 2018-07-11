@@ -1,0 +1,121 @@
+<html>
+	<title>Product Search Using Google Cloud Vision</title>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.6.4/jquery.colorbox-min.js"></script>
+		<script>
+		document.write("<link rel='stylesheet' href='/static/colorbox.css?v=" + Date.now() + "' />");
+		document.write("<script type='text/javascript' src='/static/main.js?v=" + Date.now() + "'></\script>");
+		</script>
+		<style>
+				.formColumn {
+						width: 50%;
+						text-align: left;
+				}
+				
+				#formsTable {
+						border: 1px solid black;
+						width: 900px;
+				}
+				
+				#uploadForm,
+				#uploadFormTable {
+						width: 100%;
+				}
+				#uploadFormTable input {
+						margin-bottom: 10px;
+				}
+				.longInput {
+					width: 100%;
+				}
+				
+				.metadata {
+						background-color: #33dd33;
+						width: 150px;
+						overflow-x: hidden;
+						white-space: nowrap;
+				}
+				
+				#message {
+						color: blue;
+				}
+				.imageContainer {
+					background-color: #f2f2f2;
+					/* padding: 10px; */
+					/* border: 2px solid #CCCCCC; */
+					/* max-width: 1200px; */
+					margin: 0 auto;
+					/* height: 470px; */
+					display: flex;
+					flex-flow: row wrap;
+					justify-content: flex-start;
+					align-items: flex-start;
+				}
+		</style>
+	</head>
+	<body>
+		<center>
+		<h1>Search Similar Images</h1>
+		
+		<table id="formsTable" border="1">
+			<tr>
+				<td class="formColumn">
+					<p>
+						See how to get
+						<a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys">
+							json keys for service account.
+						</a>
+					</p>
+					<p>
+						Note that your service account should be authorized to call the API and fetch your gcs indexed images.
+					</p>
+					<form method="post" id="uploadForm" onsubmit="return processUploadForm();">
+						<div id="uploadFormTable">
+							<div>
+								<label for="securityKey">Service account json key</label>
+								<input id="securityKey" type="file" accept="text/*,application/json" onchange="uploadJsonKey(this);">
+							</div>
+							<div>
+								<label for="apiEndpoint">Endpoint</label>
+								<input type="text" id="apiEndpoint" class="longInput" value="https://alpha-vision.googleapis.com/v1"
+								       onchange="toggleSubmitButton();">
+							</div>
+							<div>
+								<label for="uploadInput">Provide an image to search</label>
+								<input id="uploadInput" name="uploadedImage" accept="image/*" type="file" onchange="renderImage(this);" />
+							</div>
+							<div>
+								<label for="productSet">Product set path</label>
+								<input type="text" id="productSet" class="longInput" placeholder="i.e. projects/homegoods-test/locations/us-west1/productSets/set_id_1"
+								       onchange="toggleSubmitButton();">
+							</div>
+							<div id="categoryRadios">
+								<label for="productCategory">Product category </label>
+								<input type="text" id="productCategory" class="longInput" placeholder="i.e. homegoods or apparel" value="homegoods"
+								       onchange="toggleSubmitButton();">
+							</div>
+							<div>
+								<label for="maxItems">Number of items to return</label>
+								<input type="number" id="maxItems" min="1" max="200" value="10" 
+								       onchange="toggleSubmitButton();">
+							</div>
+							<div>
+								<input id="submit" type="submit" value="Find Similar Images" data-original="Find Similar Images" disabled/>
+							</div>
+						</div>
+					</form>
+				</td>
+				<td class="formColumn">
+					<canvas id="canvas" width="450" height="300"></canvas>
+				</td>
+			</tr>
+		</table>
+		<hr />
+		<div>
+			<p id="message"></p>
+		</div>
+		<div id="matched" class="imageContainer"></div>
+		</center>
+	</body>
+</html>
