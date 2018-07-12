@@ -29,22 +29,9 @@ function setMousePosition(e) {
   }
 };
 
-function updateFired(fired) {
-  fired += 1;
-  if (fired > 10000) {
-    return 0;
-  }
-  return fired;
-}
-
 function initDraw() {
   const canvas = $('#' + _canvasDomId)[0];
-  var fired = 0;
   canvas.onmousemove = function(e) {
-    fired = updateFired(fired);
-    if (fired % 2 > 0) {
-      return;
-    }
     setMousePosition(e);
     if (_element !== null) {
       const canvasImage = getCanvasImage();
@@ -72,25 +59,25 @@ function initDraw() {
     }
   };
 
-  canvas.onclick = function(e) {
-    if (_element !== null) {
-      _element = null;
-      canvas.style.cursor = 'default';
-      console.log('finsihed.');
-    } else {
-      console.log('begin.');
-      $('#' + _canvasDomId + ' div:last-child').remove();
-      if (_boundingPolyDomId) {
-        $('#' + _boundingPolyDomId).val('');
-      }
-      _mouse.startX = _mouse.x;
-      _mouse.startY = _mouse.y;
-      _element = document.createElement('div');
-      _element.className = 'rectangle'
-      _element.style.visibility = 'hidden';
-      canvas.appendChild(_element)
-      canvas.style.cursor = 'crosshair';
+  canvas.onmousedown = function(e) {
+    console.log('begin.');
+    // Remove all div inside the canvas.
+    $('#' + _canvasDomId + ' div').remove();
+    if (_boundingPolyDomId) {
+      $('#' + _boundingPolyDomId).val('');
     }
+    setMousePosition(e);
+    _mouse.startX = _mouse.x;
+    _mouse.startY = _mouse.y;
+    _element = document.createElement('div');
+    _element.className = 'rectangle'
+    _element.style.visibility = 'hidden';
+    canvas.appendChild(_element)
+  };
+
+  canvas.onmouseup = function() {
+    _element = null;
+    console.log('finsihed.');
   };
 }
 

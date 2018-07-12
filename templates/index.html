@@ -51,6 +51,7 @@
 				}
 				#canvas img {
 					z-index: -1;
+					cursor: crosshair
 				}
 				.rectangle {
 				  border: 1px solid #FF0000;
@@ -91,7 +92,7 @@
 								<input id="uploadInput" name="uploadedImage" accept="image/*" type="file" onchange="renderImage(this);" />
 							</div>
 							<div>
-								<label for="productSet">Product set path</label>
+								<label for="productSet">Product set path </label>
 								<input type="text" id="productSet" class="longInput" placeholder="i.e. projects/homegoods-test/locations/us-west1/productSets/set_id_1"
 								onchange="toggleSubmitButton();">
 							</div>
