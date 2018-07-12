@@ -30,6 +30,20 @@ def _Error(message):
   })
 
 
+def ParseBoundingPoly(poly_str):
+  if not poly_str:
+    return None
+  json_poly = json.loads(poly_str)
+  return {
+      'normalized_vertices': [
+          {'x': json_poly['x_min'], 'y': json_poly['y_min']},
+          {'x': json_poly['x_min'], 'y': json_poly['y_max']},
+          {'x': json_poly['x_max'], 'y': json_poly['y_min']},
+          {'x': json_poly['x_max'], 'y': json_poly['y_max']}
+      ]
+  }
+
+
 @app.route('/')
 def main():
   return render_template('index.html')
@@ -62,6 +76,11 @@ def parse_product_search_request(req):
     return 'Invalid api endpoint.'
 
   try:
+    bounding_poly = ParseBoundingPoly(req.form.get('boundingPoly', ''))
+  except (ValueError, TypeError) as e:
+    return 'Invalid bounding poly format.'
+
+  try:
     max_results = int(req.form.get('size', None))
     if max_results <= 0 or max_results > 500:
       return 'Invalid size.'
@@ -83,6 +102,7 @@ def parse_product_search_request(req):
               'product_search_params': {
                   'product_set': product_set,
                   'product_categories': [product_category],
+                  'bounding_poly': bounding_poly if bounding_poly else {},
               },
           },
       }],

@@ -2,10 +2,7 @@
 	<title>Product Search Using Google Cloud Vision</title>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://apis.google.com/js/platform.js" async defer></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.6.4/jquery.colorbox-min.js"></script>
 		<script>
-		document.write("<link rel='stylesheet' href='/static/colorbox.css?v=" + Date.now() + "' />");
 		document.write("<script type='text/javascript' src='/static/main.js?v=" + Date.now() + "'></\script>");
 		</script>
 		<style>
@@ -52,6 +49,14 @@
 					justify-content: flex-start;
 					align-items: flex-start;
 				}
+				#canvas img {
+					z-index: -1;
+				}
+				.rectangle {
+				  border: 1px solid #FF0000;
+				  position: relative;
+				  z-index: 0;
+				}
 		</style>
 	</head>
 	<body>
@@ -79,7 +84,7 @@
 							<div>
 								<label for="apiEndpoint">Endpoint</label>
 								<input type="text" id="apiEndpoint" class="longInput" value="https://alpha-vision.googleapis.com/v1"
-								       onchange="toggleSubmitButton();">
+								onchange="toggleSubmitButton();">
 							</div>
 							<div>
 								<label for="uploadInput">Provide an image to search</label>
@@ -88,17 +93,21 @@
 							<div>
 								<label for="productSet">Product set path</label>
 								<input type="text" id="productSet" class="longInput" placeholder="i.e. projects/homegoods-test/locations/us-west1/productSets/set_id_1"
-								       onchange="toggleSubmitButton();">
+								onchange="toggleSubmitButton();">
 							</div>
 							<div id="categoryRadios">
 								<label for="productCategory">Product category, i.e. homegoods or apparel</label>
 								<input type="text" id="productCategory" class="longInput" placeholder="i.e. homegoods or apparel" value="homegoods"
-								       onchange="toggleSubmitButton();">
+								onchange="toggleSubmitButton();">
 							</div>
 							<div>
 								<label for="maxItems">Number of items to return</label>
-								<input type="number" id="maxItems" min="1" max="200" value="10" 
-								       onchange="toggleSubmitButton();">
+								<input type="number" id="maxItems" min="1" max="200" value="10"
+								onchange="toggleSubmitButton();">
+							</div>
+							<div>
+								<label for="boundingPoly"> Bounding poly </label>
+								<input type="text" id="boundingPoly" class="longInput" placeholder="Click and move mouse on right side image to get bounding poly"	>
 							</div>
 							<div>
 								<input id="submit" type="submit" value="Find Similar Images" data-original="Find Similar Images" disabled/>
@@ -107,7 +116,7 @@
 					</form>
 				</td>
 				<td class="formColumn">
-					<canvas id="canvas" width="450" height="300"></canvas>
+					<div id="canvas" height="370" width="440"></canvas>
 				</td>
 			</tr>
 		</table>
@@ -118,4 +127,7 @@
 		<div id="matched" class="imageContainer"></div>
 		</center>
 	</body>
+	<script>
+	  document.write("<script type='text/javascript' src='/static/draw.js?v=" + Date.now() + "'></\script>");
+	</script>
 </html>

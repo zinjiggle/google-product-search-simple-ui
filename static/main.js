@@ -82,6 +82,8 @@ function processUploadForm() {
     return false;
   }
 
+  const boundingPoly = $('#boundingPoly').val();
+
   var fd = new FormData();
   fd.append('key', JSON_KEY_TEXT);
   fd.append('imageBlob', imageBlob);
@@ -89,6 +91,7 @@ function processUploadForm() {
   fd.append('category', productCategory);
   fd.append('endpoint', apiEndpoint);
   fd.append('size', maxItems);
+  fd.append('boundingPoly', boundingPoly);
 
   $.ajax({
      type: 'POST',
@@ -155,6 +158,7 @@ function renderImage(form) {
       toggleSubmitButton();
     };
     reader.readAsDataURL(form.files[0]);
+    $('#boundingPoly').val('');
   }
 }
 
@@ -169,15 +173,15 @@ function renderImageToCanvas(img) {
   if (!img) {
     return;
   }
-  const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const scale = min(canvas.width / img.width, canvas.height / img.height);
-  const image_height = img.height * scale;
-  const image_width = img.width * scale;
-  ctx.drawImage(
-      img, canvas.width / 2 - image_width / 2,
-      canvas.height / 2 - image_height / 2, image_width, image_height);
+  const canvas = $('#canvas');
+  canvas.empty();
+  const scale =
+      min(canvas.attr('width') / img.width, canvas.attr('height') / img.height);
+  img.height = img.height * scale;
+  img.width = img.width * scale;
+  canvas.width(img.width);
+  canvas.height(img.height);
+  canvas.append(img);
   showMessage('Image is valid. Click to find similar dolphins.');
 }
 
@@ -227,16 +231,6 @@ function renderMatchTable(numMatches, results) {
     // Add to the row.
     $MATCHEDIMAGESDIV.append(div_one_image);
   }
-
-  $('a.matched').colorbox({
-    transition: 'none',
-    rel: 'gal',
-    scalePhotos: true,
-    maxWidth: '90%',
-    maxHeight: '90%',
-    opacity: 0.2,
-    speed: 200
-  });
 }
 
 function processResponse(response) {
