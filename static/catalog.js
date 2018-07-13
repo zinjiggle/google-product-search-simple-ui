@@ -201,21 +201,21 @@ function get_child(dom, name) {
   return dom.children('[name="' + name + '"]');
 }
 
-function add_dom(div_dom) {
-  ALL_HANDLERS.push(new ImportHandler(div_dom));
-  CSV_DOM.append(div_dom);
+function add_dom(new_dom, exist_dom) {
+  ALL_HANDLERS.push(new ImportHandler(new_dom));
+  exist_dom.before(new_dom);
 }
 
 function fill_handlers(div_dom, handler) {
   get_child(div_dom, 'add').click(function() {
     const new_dom = ORIGINAL_CHILD.clone();
-    add_dom(new_dom);
+    add_dom(new_dom, div_dom);
   });
   get_child(div_dom, 'remove').click(function() {
     handler.remove();
     div_dom.remove();
     if (num_child() == 0) {
-      add_dom(ORIGINAL_CHILD.clone());
+      add_dom(ORIGINAL_CHILD.clone(), div_dom);
     }
   });
   get_child(div_dom, 'input').on('change input paste', function() {
