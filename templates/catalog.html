@@ -1,0 +1,84 @@
+<html>
+  <title>Catalog management for product search</title>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+    document.write(
+    '<link rel="stylesheet" type="text/css" href="/static/main.css?v=' + Date.now() + '">');
+    </script>
+  </head>
+  <body>
+    <center>
+    <div class="section">
+      <h3>Configurations</h3>
+      <div>
+        <label for="apiEndpoint">API Endpoint</label>
+        <input type="text" id="apiEndpoint" class="width100" value="https://alpha-vision.googleapis.com/v1">
+      </div>
+      
+      <div>
+        <label for="securityKey">Service account json key, see how to get
+          <a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys">
+          json keys for service account.</a></label>
+          <input id="securityKey" type="file" accept="text/*,application/json">
+        </div>
+        <div>
+          <input id="projectId" type="text" class="width100" placeholder="Provide your google cloud project id">
+        </div>
+        <div>
+          <label>Location:</label>&nbsp;&nbsp;&nbsp;
+          <input type="radio" name="location" value="us-west1" checked >
+          <label for="location">us-west1</label>
+          <input type="radio" name="location" value="us-east1">
+          <label for="location">us-east1</label>
+          <input type="radio" name="location" value="asia-east1">
+          <label for="location">asia-east1</label>
+          <input type="radio" name="location" value="europe-west1">
+          <label for="location">europe-west1</label>
+        </div>
+      </div>
+      <div class="section">
+        <h3>Index images from CSVs</h3>
+        <div class="text-left">
+          <button type="button" class="toggle" toggle_target="#csv_intro">Toggle introduction to csv format</button>
+          <div style="display: none" id="csv_intro">
+            Format of csv file: one image per line, 8 columns required in each line.
+            <ol>
+              <li> image-uri: required, must be a google cloud storage image uri. </li>
+              <li> image-id: optional, auto assign if empty.</li>
+              <li> product-set-id: required. </li>
+              <li> product-id: required. </li>
+              <li> product-category: required. </li>
+              <li> product-display-name: optional. </li>
+              <li> labels: optional, label of the product. Format: "key_1=value_1,key_2=value_2"</li>
+              <li> bounding-poly: optional. Format: "p1_x,p1_y,p2_x,p2_y,...,pn_x,pn_y"</li>
+            </ol>
+            For example: <br>
+            gs://bucket/image.jpg,img1,set1,product1,homegoods,"product name","color=red,gender=women","0.0,0.0,0.4,0.5"
+          </div>
+        </div>
+        <div id="csv">
+          <div>
+            <button type="button" name="add">+</button>
+            <button type="button" name="remove">-</button>
+            <input type="text" name="input" class="width80" placeholder="csv file: i.e. gs://bucket/import.csv">
+            <button type="button" name="submit" disabled>Import</button>
+            <div name="result"></div>
+            <div name="operation_status"></div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <h3>Get status of operation</h3>
+        <input type="text" id="operationId" class="width80" placeholder="Operation id: i.e. locations/us-west1/operations/4e1c35a493c0cc5b">
+        <input type="button" value="Get" id="operationButton" disabled>
+        <div id="showOperation"></div>
+      </div>
+      
+      
+      </center>
+    </body>
+    <script>
+    document.write("<script type='text/javascript' src='/static/catalog.js?v=" + Date.now() + "'></\script>");
+    </script>
+  </html>

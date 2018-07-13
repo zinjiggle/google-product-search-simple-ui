@@ -49,6 +49,11 @@ def main():
   return render_template('index.html')
 
 
+@app.route('/catalog')
+def catalog():
+  return render_template('catalog.html')
+
+
 def parse_product_search_request(req):
   image_file = req.files.get('imageBlob', None)
   if not image_file:
@@ -133,18 +138,84 @@ def product_search():
   })
 
 
+def check_key_in_json(content, keys):
+  for key in keys:
+    if key not in content:
+      return _Error('No {} in request'.format(key))
+  return None
+
+
+def validate_json_key(json_key_string):
+  try:
+    json_key = json.loads(json_key_string)
+  except (ValueError, TypeError):
+    return (_Error('Invalid key found in request'), False)
+  return (json_key, True)
+
+
+@app.route('/importCsv', methods=['POST'])
+def import_csv():
+  content = request.get_json()
+  error_or_none = check_key_in_json(
+      content, ['url_for_import', 'gcs_uri', 'key'])
+  if error_or_none:
+    return error_or_none
+  (json_key_or_error, success) = validate_json_key(content['key'])
+  if not success:
+    return json_key_or_error
+  url_for_import = content['url_for_import']
+  try:
+    credentials = service_account.Credentials.from_service_account_info(
+        json_key_or_error)
+    scoped_credentials = credentials.with_scopes(_DEFAULT_SCOPES)
+    authed_session = AuthorizedSession(scoped_credentials)
+    response = authed_session.post(url=url_for_import, data=json.dumps({
+        'input_config': {
+            'gcs_source': {
+                'csv_file_uri': content['gcs_uri']
+            }
+        }})).json()
+  except Exception as e:
+    return _Error('Error post %r: %r' % (url_for_import, e))
+  res = json.dumps({
+      'success': True,
+      'response': response,
+  })
+  return res
+
+
+@app.route('/getOperation', methods=['POST'])
+def get_operation():
+  content = request.get_json()
+  error_or_none = check_key_in_json(
+      content, ['operation_url', 'key'])
+  if error_or_none:
+    return error_or_none
+  (json_key_or_error, success) = validate_json_key(content['key'])
+  if not success:
+    return json_key_or_error
+  try:
+    credentials = service_account.Credentials.from_service_account_info(
+        json_key_or_error)
+    scoped_credentials = credentials.with_scopes(_DEFAULT_SCOPES)
+    authed_session = AuthorizedSession(scoped_credentials)
+    response = authed_session.get(url=content['operation_url']).json()
+  except Exception as e:
+    return _Error('Error GET %r: %r' % (content['operation_url'], e))
+  res = json.dumps({
+      'success': True,
+      'response': response,
+  })
+  return res
+
+
 @app.route('/getMatchedImage', methods=['POST'])
 def get_match_image():
   content = request.get_json()
-
-  if 'name' not in content:
-    return _Error('No name found in request')
-
-  if 'key' not in content:
-    return _Error('No key found in request')
-
-  if 'endpoint' not in content:
-    return _Error('No api endpoint in request')
+  error_or_none = check_key_in_json(
+      content, ['name', 'key', 'endpoint'])
+  if error_or_none:
+    return error_or_none
 
   image_full_name = content['name']
   endpoint = content['endpoint']
@@ -153,10 +224,9 @@ def get_match_image():
   product_id = image_full_name.split('/')[5]
   url = os.path.join(endpoint, image_full_name)
 
-  try:
-    json_key = json.loads(content['key'])
-  except (ValueError, TypeError):
-    return _Error('Invalid key found in request')
+  (json_key, success) = validate_json_key(content['key'])
+  if not success:
+    return json_key
 
   try:
     credentials = service_account.Credentials.from_service_account_info(

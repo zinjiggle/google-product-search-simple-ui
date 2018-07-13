@@ -1,0 +1,128 @@
+/**********************Copy text button***************************/
+.tooltip {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+/**********************Copy text button***************************/
+
+
+/****************For catalog.html***************/
+.width100 {
+  width: 100%;
+}
+
+.width80 {
+  width: 80%;
+}
+
+.section {
+  width: 50%;
+  margin-top: 30px;
+}
+
+.section div {
+  margin-top: 10px;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+/****************For catalog.html***************/
+
+/****************For index.html***************/
+.formColumn {
+  width: 50%;
+  text-align: left;
+}
+
+#formsTable {
+  border: 1px solid black;
+  width: 900px;
+}
+
+#uploadForm, #uploadFormTable {
+  width: 100%;
+}
+
+#uploadFormTable input {
+  margin-bottom: 10px;
+}
+
+.longInput {
+  width: 100%;
+}
+
+.metadata {
+  background-color: #33dd33;
+  width: 150px;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+#message {
+  color: blue;
+}
+
+.imageContainer {
+  background-color: #f2f2f2;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+#canvas {
+  cursor: crosshair;
+}
+
+#canvas img {
+  z-index: -1;
+}
+
+.rectangle {
+  border: 1px solid #FF0000;
+  position: relative;
+  z-index: 0;
+}
+
+/****************For index.html***************/
