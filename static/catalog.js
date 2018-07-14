@@ -212,11 +212,11 @@ function fill_handlers(div_dom, handler) {
     add_dom(new_dom, div_dom);
   });
   get_child(div_dom, 'remove').click(function() {
-    handler.remove();
-    div_dom.remove();
-    if (num_child() == 0) {
+    if (num_child() == 1) {
       add_dom(ORIGINAL_CHILD.clone(), div_dom);
     }
+    handler.remove();
+    div_dom.remove();
   });
   get_child(div_dom, 'input').on('change input paste', function() {
     if (/^gs:[//][\^/].+[/].+$/.test($(this).val())) {
