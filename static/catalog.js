@@ -28,6 +28,8 @@ const _CONSTANTS = {
   op_button: 'operationButton',
   op_show: 'showOperation',
   csv: 'csv',
+  alpha: 'https://alpha-vision.googleapis.com/v1',
+  beta: 'https://vision.googleapis.com/v1p3beta1',
 };
 
 const _COMMON_CONFIG = (function() {
@@ -60,6 +62,10 @@ const _COMMON_CONFIG = (function() {
   };
   jquery_dom(_CONSTANTS.key).change(function() {
     read_json_key(jquery_dom(_CONSTANTS.key)[0], config);
+  });
+  $('input:radio[name=endpoint]').on('change', function() {
+    const checked_val = $('input:radio[name=endpoint]:checked').val();
+    jquery_dom(_CONSTANTS.endpoint).val(_CONSTANTS[checked_val]);
   });
 
   config.is_valid = function() {
