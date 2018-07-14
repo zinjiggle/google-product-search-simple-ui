@@ -324,7 +324,7 @@ ImportHandler.prototype.check_status = function() {
       console.log(response);
     } else {
       if (result.done) {
-        show_pre_in_dom(slf.operation_status_dom, result, 'Operation id done!');
+        show_pre_in_dom(slf.operation_status_dom, result, 'Operation DONE!');
       } else {
         const img = $('<img>').attr('src', '/static/spinner-white.gif');
         img.width(80).height(80);
