@@ -7,7 +7,15 @@ var _element = null;
 var _boundingPoly = {x_min: 0, y_min: 0, x_max: 0, y_max: 0};
 
 function getCanvasOffset() {
-  return $('#' + _canvasDomId).offset();
+  const offset = $('#' + _canvasDomId).offset();
+  if (window.pageYOffset) {
+    offset.top += window.pageYOffset;
+    offset.left += window.pageXOffset;
+  } else if (document.body.scrollTop) {
+    offset.top += document.body.scrollTop;
+    offset.left += document.body.scrollLeft;
+  }
+  return offset;
 }
 
 function getCanvasImage() {
