@@ -472,10 +472,7 @@ const OperationStatusModel = Backbone.Model.extend({
     if (response.success) {
       response = response.response;
     }
-    if (response.error) {
-      return response;
-    }
-    return response.result;
+    return response;
   },
   checkStatus: function() {
     this.set('error', '');
