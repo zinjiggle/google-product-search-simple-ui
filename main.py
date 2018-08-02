@@ -46,7 +46,7 @@ def ParseBoundingPoly(poly_str):
 
 @app.route('/')
 def main():
-  return render_template('index.html')
+  return render_template('app.html')
 
 
 @app.route('/catalog')
@@ -238,7 +238,7 @@ def get_match_image():
     return _Error('%r: %r' % (image_full_name, e))
 
   if 'uri' not in response:
-    return _Error('Image not found: %r' % (image_full_name))
+    return _Error('Image not found: %r' % (response))
 
   try:
     gcs_client = storage.Client(

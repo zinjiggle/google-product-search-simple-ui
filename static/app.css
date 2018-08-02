@@ -1,0 +1,218 @@
+/**********************Copy text button***************************/
+.tooltip {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+/**********************Copy text button***************************/
+
+.container {
+  width: 100%;
+  float: left;
+  margin-top:80px;
+}
+
+.left-frame {
+  width: 20%;
+  float: left;
+  padding-right:20px;
+  border-right: 1px solid black;
+  height: 800px;
+  margin-left:10px;
+}
+
+.right-frame {
+  float: left;
+  width: 75%;
+}
+
+.left-frame .endpoint-text {
+  width: 100%;
+}
+
+.project-id-text {
+  width: 100%;
+}
+
+.section {
+  width: 95%;
+  margin-top: 30px;
+  margin:auto;
+}
+
+.section div {
+  margin-top: 10px;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.error {
+  color: red;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.width80 {
+  width: 80%;
+}
+
+
+/****************For index.html***************/
+.num-items {
+  width: 40px;
+}
+
+.metadata {
+  background-color: #33dd33;
+  width: 150px;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+.image-container {
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+#canvas {
+  cursor: crosshair;
+  user-drag: none; 
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+#canvas img {
+  z-index: 0;
+}
+
+.canvas-box {
+}
+
+.canvas-container {
+  height: 430px;
+  width: 440px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background: lightgray;
+}
+.canvas-bbox {
+  width: 440px;
+}
+.canvas-bbox input {
+  width: 80%;
+}
+
+.one-image {
+  margin: 3px;
+  border: 2px solid;
+}
+
+.rectangle {
+  border: 1px solid #FF0000;
+  position: relative;
+  z-index: 1;
+}
+
+.canvas-all {
+  float: left;
+  margin-right: 40px;
+  margin-bottom: 20px;
+}
+
+.right-images {
+  float: left;
+  width: 500px;
+}
+
+.bottom-images {
+  width: 100%;
+  float: left;
+}
+
+.search-button {
+}
+
+.navbar-logo {
+  width: 300px;
+}
+
+.right-frame {
+  margin-left: 10px;
+}
+
+.location-div input {
+  margin-left:10px;
+}
+
+.radio-category {
+  margin-left: 10px;
+}
+.endpoint-radio {
+  margin-left: 10px;
+  width: 100%;
+  float:left;
+}
+
+/****************For index.html***************/
+
+.search-image-config {
+  margin-top:20px;
+}
+
+.row {
+  margin-bottom: 15px;
+}
+
+.index-time {
+  color:red;
+  padding-left: 10px;
+}
+
+.div-radio:hover {
+  cursor: -webkit-grab;
+  cursor: grab;
+  background: #f2f2f2;
+}
