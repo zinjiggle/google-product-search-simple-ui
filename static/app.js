@@ -684,16 +684,8 @@ const CsvInputView = Backbone.View.extend({
   },
   showResponse: function() {
     const response = this.model.get('response');
-    const success = response.response.done && response.response.result;
-    if (success) {
-      showPreInDom(
-          this.$('.operation_status'), response.response, 'Operation SUCCESS!');
-    } else {
-      showPreInDom(
-          this.$('.operation_status'),
-          response.success ? response.response : response, 'Operation FAILED!');
-      this.$('.operation_status p').addClass('error');
-    }
+    showPreInDom(
+        this.$('.operation_status'), response.response, 'Operation FINISHED!');
   },
   showOperationId: function() {
     const operation_id = this.model.get('operation_id');
