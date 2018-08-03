@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
     </head>
     <body>
-      <nav class="navbar has-shadow is-fixed-top" role="navigation">
+      <nav class="navbar has-shadow" role="navigation">
           <div class="navbar-brand"> <div class="navbar-logo"></div> </div>
           <div class="navbar-menu is-active">
               <div class="navbar-start">
@@ -27,7 +27,10 @@
         <div class="section">
           <div class="title is-6">Index images from CSVs</div>
           <div class="text-left">
-            <button type="button" class="toggle" toggle_target="#csv_intro">Toggle introduction to csv format</button>
+            <a type="button" class="toggle button is-light is-small" toggle_target="#csv_intro">
+              <span>Toggle CSV format introduction</span>
+              <span class="icon"> <i class="fas fa-caret-square-down"></i> </span>
+            </a>
             <div style="display: none" class="content" id="csv_intro">
               <p>
                 Format of csv file: one image per line, 8 columns required in each line.
@@ -159,10 +162,15 @@
           <div class="bottom-images image-container" id="<%= bottom %>"></div>
       </script>
       <script type="text/template" id="csv_input_template">
-          <button type="button" name="add" class="add">+</button> 
-          <button type="button" name="remove" class="remove">-</button> 
+          <button type="button" name="add" class="add button is-small"><i class="fas fa-plus"></i></button> 
+          <button type="button" name="remove" class="remove button is-small"><i class="far fa-trash-alt"></i></button> 
           <input type="text" name="input" class="width80 input is-small is-primary" placeholder="csv file: i.e. gs://bucket/import.csv"> 
-          <button type="button" name="submit" class="import" disabled>Import</button> 
+          <button type="button" name="submit" class="import button is-small" disabled>
+            <span class="icon">
+              <i class="fas fa-file-import"></i>
+            </span>
+            <span>Import</span>
+          </button> 
           <div name="result" class="result"></div> 
           <div name="operation_status" class="operation_status"></div> 
       </script>
@@ -171,7 +179,12 @@
           <div class="title is-6">Get status of operation</div>
           <input type="text" id="operation-id" class="width80 input is-small is-primary"
                  placeholder="Operation id: i.e. locations/us-west1/operations/4e1c35a493c0cc5b">
-          <input type="button" value="Get" id="operation-button" disabled>
+          <button type="button" class="button is-small" id="operation-button" disabled>
+            <span class="icon">
+              <i class="fas fa-search"></i>
+            </span>
+            <span>Get</span>
+          </button>
           <div id="show-operation"></div> 
         </div>
       </script>

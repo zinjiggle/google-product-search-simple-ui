@@ -484,7 +484,6 @@ const OperationStatusModel = Backbone.Model.extend({
     const operation_url = this.config_model.getEndpointNoVersion() + '/v1/' +
         this.get('operation_id');
     console.log(operation_url);
-    this.set('url', operation_url);
     $.ajax({
        url: '/getOperation',
        type: 'POST',
@@ -497,6 +496,7 @@ const OperationStatusModel = Backbone.Model.extend({
        dataType: 'json',
      }).done(function(response) {
       this.set('response', response);
+      this.set('url', operation_url);
     }.bind(this));
   },
 });
@@ -515,7 +515,7 @@ const SearchOperationStatusView = Backbone.View.extend({
     this.model.on(
         {
           'change:error': this.showError,
-          'change:response': this.showResponse,
+          'change:url': this.showResponse,
         },
         this);
     return this;
@@ -701,9 +701,10 @@ const CsvInputView = Backbone.View.extend({
       this.$el.before(new CsvInputView().render(parent).$el);
     }.bind(this));
     this.$('.remove').click(function() {
-      if (parent.size() > 1) {
-        this.$el.remove();
+      if (parent.size() == 1) {
+        this.$('.add').click();
       }
+      this.$el.remove();
     }.bind(this));
     this.$('input[name="input"]').on('change input paste', function(e) {
       if (/^gs:[//][\^/].+[/].+$/.test($(e.target).val())) {
@@ -748,7 +749,7 @@ const IndexCsvView = Backbone.View.extend({
   render: function() {
     this.$el.html(this.template);
     this.$('.toggle').click(function(e) {
-      const target = $(e.target).attr('toggle_target');
+      const target = $(this).attr('toggle_target');
       const dom = $(target)[0];
       if (dom.style.display == 'none') {
         dom.style.display = '';
