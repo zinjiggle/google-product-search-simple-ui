@@ -35,23 +35,25 @@ def ParseBoundingPoly(poly_str):
     return None
   json_poly = json.loads(poly_str)
   return {
-      'normalized_vertices': [
-          {'x': json_poly['x_min'], 'y': json_poly['y_min']},
-          {'x': json_poly['x_min'], 'y': json_poly['y_max']},
-          {'x': json_poly['x_max'], 'y': json_poly['y_min']},
-          {'x': json_poly['x_max'], 'y': json_poly['y_max']}
-      ]
+      'normalized_vertices': [{
+          'x': json_poly['x_min'],
+          'y': json_poly['y_min']
+      }, {
+          'x': json_poly['x_min'],
+          'y': json_poly['y_max']
+      }, {
+          'x': json_poly['x_max'],
+          'y': json_poly['y_min']
+      }, {
+          'x': json_poly['x_max'],
+          'y': json_poly['y_max']
+      }]
   }
 
 
 @app.route('/')
 def main():
   return render_template('app.html')
-
-
-@app.route('/catalog')
-def catalog():
-  return render_template('catalog.html')
 
 
 def parse_product_search_request(req):
@@ -66,7 +68,7 @@ def parse_product_search_request(req):
   try:
     json_key = json.loads(req.form.get('key', None))
   except (ValueError, TypeError):
-    return "Invalid json key."
+    return 'Invalid json key.'
 
   product_set = req.form.get('productSet', '')
   if not product_set:
@@ -97,12 +99,10 @@ def parse_product_search_request(req):
           'image': {
               'content': b64encode(content).decode('ascii'),
           },
-          'features': [
-              {
-                  'type': 'PRODUCT_SEARCH',
-                  'max_results': max_results,
-              }
-          ],
+          'features': [{
+              'type': 'PRODUCT_SEARCH',
+              'max_results': max_results,
+          }],
           'image_context': {
               'product_search_params': {
                   'product_set': product_set,
@@ -156,8 +156,8 @@ def validate_json_key(json_key_string):
 @app.route('/importCsv', methods=['POST'])
 def import_csv():
   content = request.get_json()
-  error_or_none = check_key_in_json(
-      content, ['url_for_import', 'gcs_uri', 'key'])
+  error_or_none = check_key_in_json(content,
+                                    ['url_for_import', 'gcs_uri', 'key'])
   if error_or_none:
     return error_or_none
   (json_key_or_error, success) = validate_json_key(content['key'])
@@ -169,12 +169,15 @@ def import_csv():
         json_key_or_error)
     scoped_credentials = credentials.with_scopes(_DEFAULT_SCOPES)
     authed_session = AuthorizedSession(scoped_credentials)
-    response = authed_session.post(url=url_for_import, data=json.dumps({
-        'input_config': {
-            'gcs_source': {
-                'csv_file_uri': content['gcs_uri']
+    response = authed_session.post(
+        url=url_for_import,
+        data=json.dumps({
+            'input_config': {
+                'gcs_source': {
+                    'csv_file_uri': content['gcs_uri']
+                }
             }
-        }})).json()
+        })).json()
   except Exception as e:
     return _Error('Error post %r: %r' % (url_for_import, e))
   res = json.dumps({
@@ -187,8 +190,7 @@ def import_csv():
 @app.route('/getOperation', methods=['POST'])
 def get_operation():
   content = request.get_json()
-  error_or_none = check_key_in_json(
-      content, ['operation_url', 'key'])
+  error_or_none = check_key_in_json(content, ['operation_url', 'key'])
   if error_or_none:
     return error_or_none
   (json_key_or_error, success) = validate_json_key(content['key'])
@@ -212,8 +214,7 @@ def get_operation():
 @app.route('/getMatchedImage', methods=['POST'])
 def get_match_image():
   content = request.get_json()
-  error_or_none = check_key_in_json(
-      content, ['name', 'key', 'endpoint'])
+  error_or_none = check_key_in_json(content, ['name', 'key', 'endpoint'])
   if error_or_none:
     return error_or_none
 
