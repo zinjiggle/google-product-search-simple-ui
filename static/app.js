@@ -884,8 +884,7 @@ const DisplaySearchResultView = Backbone.View.extend({
     const image = div.find('img');
     const anchor = div.find('a');
     if (!response.success) {
-      const errorUrl =
-          'https://storage.googleapis.com/dolphin-static/error.png';
+      const errorUrl = '/static/not-found.png';
       image.attr('src', errorUrl);
       label.html(response.error);
       console.log(response);
