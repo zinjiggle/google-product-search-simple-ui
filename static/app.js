@@ -967,7 +967,7 @@ const CanvasView = Backbone.View.extend({
     canvas.width(img.width);
     canvas.height(img.height);
     canvas.append(img);
-    this.$('#bounding-poly').empty().change();
+    this.$('#bounding-poly').val('').change();
   },
   template: _.template($('#canvas_template').html()),
 });
