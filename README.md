@@ -2,7 +2,7 @@ This is a simple UI interface to call [Google product search API](https://cloud.
 
 It helps user to index and search images.
 
-Video tutorial: https://www.youtube.com/watch?v=BOdUYTO1jJY&t=381s
+Video tutorial: https://www.youtube.com/watch?v=BOdUYTO1jJY
 
 To start the app in python virtual environment:
 + virtualenv --python python3 env
