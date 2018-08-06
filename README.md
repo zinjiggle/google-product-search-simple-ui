@@ -2,6 +2,8 @@ This is a simple UI interface to call [Google product search API](https://cloud.
 
 It helps user to index and search images.
 
+Sample site: http://search.tefiti.com/
+
 Video tutorial: https://youtu.be/BOdUYTO1jJY
 
 To start the app in python virtual environment:
