@@ -226,6 +226,7 @@ var SearchImageModel = Backbone.Model.extend({
     'product_set_id': '',
     'product_category': 'homegoods',
     'max_items': 10,
+    'model_version': 'builtin/latest',
     'bounding_poly': '',
     'error': '',
     'index_time': '',
@@ -327,6 +328,7 @@ var SearchImageModel = Backbone.Model.extend({
     fd.append('endpoint', this.config_model.get('endpoint'));
     fd.append('size', max_items);
     fd.append('boundingPoly', this.get('bounding_poly'));
+    fd.append('model_version', this.get('model_version'));
 
     $.ajax({
        type: 'POST',
@@ -782,6 +784,10 @@ const SearchImageConfigView = Backbone.View.extend({
     this.$('#upload-image').change(this.renderImage.bind(this));
     this.$('#max-items').change(function(e) {
       this.model.set('max_items', $(e.target).val());
+    }.bind(this));
+    this.$('#model').change(function(e) {
+      this.model.set(
+          'model_version', $(e.target).is(':checked') ? $(e.target).val() : '');
     }.bind(this));
     return this;
   },

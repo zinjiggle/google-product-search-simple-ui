@@ -82,6 +82,8 @@ def parse_product_search_request(req):
   if not endpoint or not endpoint.startswith('https://'):
     return 'Invalid api endpoint.'
 
+  model_version = req.form.get('model_version', '')
+
   try:
     bounding_poly = ParseBoundingPoly(req.form.get('boundingPoly', ''))
   except (ValueError, TypeError) as e:
@@ -102,6 +104,7 @@ def parse_product_search_request(req):
           'features': [{
               'type': 'PRODUCT_SEARCH',
               'max_results': max_results,
+              'model': model_version,
           }],
           'image_context': {
               'product_search_params': {

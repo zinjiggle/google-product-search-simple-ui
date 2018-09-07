@@ -78,11 +78,18 @@
           <div>Category:</div>
           <div class="radio-category div-radio"> <input type="radio" name="category" value="homegoods" checked> homegoods</div>
           <div class="radio-category div-radio"> <input type="radio" name="category" value="apparel"> apparel</div>
+          <div class="radio-category div-radio"> <input type="radio" name="category" value="toys"> toys</div>
           <input type="text" id="product-category" class="width100 input is-small" placeholder="i.e. homegoods or apparel" value="homegoods">
         </div>
         <div class="row">
           <label>Number of items
             <input type="number" id="max-items" class="num-items" min="1" max="200" value="10">
+          </label>
+        </div>
+        <div class="row">
+          <label class="checkbox">
+            <input type="checkbox" id="model" name="latest" value="builtin/latest" checked>
+            Use latest model
           </label>
         </div>
       </div>
@@ -107,8 +114,8 @@
       </script>
 
       <script type="text/template" id="location_template">
-        <div class="location-div row"> 
-          <div>Location</div> 
+        <div class="location-div row">
+          <div>Location</div>
           <div class="div-radio">
               <input type="radio" name="location" value="us-west1" checked >
               us-west1
@@ -129,50 +136,50 @@
       </script>
 
       <script type="text/template" id="config_template">
-        <div class="title is-6">CONFIG</div> 
-        <div class="row"> 
-          <div>Endpoint</div> 
+        <div class="title is-6">CONFIG</div>
+        <div class="row">
+          <div>Endpoint</div>
           <div class="endpoint-radio div-radio">
             <input type="radio" name="endpoint" value="beta" checked> beta
           </div>
           <div class="endpoint-radio div-radio">
             <input type="radio" name="endpoint" value="alpha"> alpha
           </div>
-          <input id="endpoint-text" type="text" class="endpoint-text input is-small" value="<%= endpoint %>"> 
+          <input id="endpoint-text" type="text" class="endpoint-text input is-small" value="<%= endpoint %>">
         </div>
-      </script> 
-      <script type="text/template" id="canvas_template"> 
+      </script>
+      <script type="text/template" id="canvas_template">
           <div class="canvas-all">
-            <div class="canvas-bbox"> 
+            <div class="canvas-bbox">
               <input type="text" class="input is-small" id="bounding-poly"
-                     placeholder="Click and move mouse on image for bounding poly"> 
-              <a class="button is-small search-button"> 
+                     placeholder="Click and move mouse on image for bounding poly">
+              <a class="button is-small search-button">
                 <span class="icon">
                   <i class="fas fa-search"></i>
                 </span>
                 <span>Search</span>
               </a>
             </div>
-            <div class="canvas-container"> 
-              <div id="canvas" height="430" width="440"></div> 
-            </div> 
+            <div class="canvas-container">
+              <div id="canvas" height="430" width="440"></div>
+            </div>
             <div id="canvas-notice"></div>
           </div>
           <div class="right-images image-container" id="<%= right %>"></div>
           <div class="bottom-images image-container" id="<%= bottom %>"></div>
       </script>
       <script type="text/template" id="csv_input_template">
-          <button type="button" name="add" class="add button is-small"><i class="fas fa-plus"></i></button> 
-          <button type="button" name="remove" class="remove button is-small"><i class="far fa-trash-alt"></i></button> 
-          <input type="text" name="input" class="width80 input is-small is-primary" placeholder="csv file: i.e. gs://bucket/import.csv"> 
+          <button type="button" name="add" class="add button is-small"><i class="fas fa-plus"></i></button>
+          <button type="button" name="remove" class="remove button is-small"><i class="far fa-trash-alt"></i></button>
+          <input type="text" name="input" class="width80 input is-small is-primary" placeholder="csv file: i.e. gs://bucket/import.csv">
           <button type="button" name="submit" class="import button is-small" disabled>
             <span class="icon">
               <i class="fas fa-file-import"></i>
             </span>
             <span>Import</span>
-          </button> 
-          <div name="result" class="result"></div> 
-          <div name="operation_status" class="operation_status"></div> 
+          </button>
+          <div name="result" class="result"></div>
+          <div name="operation_status" class="operation_status"></div>
       </script>
       <script type="text/template" id="operation_status_search_template">
         <div class="section">
@@ -185,10 +192,10 @@
             </span>
             <span>Get</span>
           </button>
-          <div id="show-operation"></div> 
+          <div id="show-operation"></div>
         </div>
       </script>
-        
+
         <!-- ========= -->
         <!-- Libraries -->
         <!-- ========= -->
