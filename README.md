@@ -2,7 +2,7 @@ This is a simple UI interface to call [Google product search API](https://cloud.
 
 It helps user to index and search images.
 
-Sample site: http://search.tefiti.com/
+Sample site: https://media-demo-service.appspot.com/
 
 Video tutorial: https://youtu.be/BOdUYTO1jJY
 
