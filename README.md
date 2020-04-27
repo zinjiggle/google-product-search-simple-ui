@@ -2,7 +2,8 @@ This is a simple UI interface to call [Google product search API](https://cloud.
 
 It helps user to index and search images.
 
-Sample site: https://media-demo-service.appspot.com/
+Sample site: https://media-demo-service.appspot.com/ 
+Note: the sample site above supports old only alpha & beta version of Product Search. For the latest versions please deploy web app from this repo's source code.
 
 Video tutorial: https://youtu.be/BOdUYTO1jJY
 
