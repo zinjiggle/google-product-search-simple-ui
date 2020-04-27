@@ -15,11 +15,11 @@
       <h3>Configurations</h3>
       <div>
         <label for="apiEndpoint">API Endpoint</label>
-        <input type="radio" name="endpoint" value="beta" checked>
+        <input type="radio" name="endpoint" value="beta">
         <label for="endpoint">beta</label>
-        <input type="radio" name="endpoint" value="alpha">
-        <label for="endpoint">alpha</label>
-        <input type="text" id="apiEndpoint" class="width100" value="https://vision.googleapis.com/v1p3beta1">
+        <input type="radio" name="endpoint" value="prod" checked>
+        <label for="endpoint">prod</label>
+        <input type="text" id="apiEndpoint" class="width100" value="https://vision.googleapis.com/v1">
       </div>
       
       <div>
@@ -60,7 +60,7 @@
               <li> bounding-poly: optional. Format: "p1_x,p1_y,p2_x,p2_y,...,pn_x,pn_y"</li>
             </ol>
             For example: <br>
-            gs://bucket/image.jpg,img1,set1,product1,homegoods,"product name","color=red,gender=women","0.0,0.0,0.4,0.5"
+            gs://bucket/image.jpg,img1,set1,product1,homegoods-v2,"product name","color=red,gender=women","0.0,0.0,0.4,0.5"
           </div>
         </div>
         <div id="csv">

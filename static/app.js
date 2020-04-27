@@ -153,8 +153,8 @@ const CopyDomClass = (function() {
 
 function getEndpoint(env) {
   const map = {
-    alpha: 'https://alpha-vision.googleapis.com/v1',
-    beta: 'https://vision.googleapis.com/v1p3beta1',
+    beta: 'https://vision.googleapis.com/v1p4beta1',
+    prod: 'https://vision.googleapis.com/v1'
   };
   return map[env];
 }
@@ -206,7 +206,7 @@ var ConfigModel = Backbone.Model.extend({
   },
 
   defaults: {
-    'endpoint': getEndpoint('beta'),
+    'endpoint': getEndpoint('prod'),
     'key': '',
     'location': 'us-west1',
     'project_id': '',
@@ -224,7 +224,7 @@ var SearchImageModel = Backbone.Model.extend({
   defaults: {
     'image_blob': null,
     'product_set_id': '',
-    'product_category': 'homegoods',
+    'product_category': 'homegoods-v2',
     'max_items': 10,
     'model_version': 'builtin/latest',
     'bounding_poly': '',
