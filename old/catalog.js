@@ -28,8 +28,8 @@ const _CONSTANTS = {
   op_button: 'operationButton',
   op_show: 'showOperation',
   csv: 'csv',
-  alpha: 'https://alpha-vision.googleapis.com/v1',
-  beta: 'https://vision.googleapis.com/v1p3beta1',
+  beta: 'https://vision.googleapis.com/v1p4beta1',
+  prod: 'https://vision.googleapis.com/v1',
 };
 
 const _COMMON_CONFIG = (function() {

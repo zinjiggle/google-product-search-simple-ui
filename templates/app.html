@@ -47,7 +47,7 @@
               </p>
               <p>
                 For example:
-                gs://bucket/image.jpg,img1,set1,product1,homegoods,"product name","color=red,gender=women","0.0,0.0,0.4,0.5"
+                gs://bucket/image.jpg,img1,set1,product1,homegoods-v2,"product name","color=red,gender=women","0.0,0.0,0.4,0.5"
               </p>
             </div>
           </div>
@@ -76,10 +76,12 @@
         </div>
         <div class="row">
           <div>Category:</div>
-          <div class="radio-category div-radio"> <input type="radio" name="category" value="homegoods" checked> homegoods</div>
-          <div class="radio-category div-radio"> <input type="radio" name="category" value="apparel"> apparel</div>
-          <div class="radio-category div-radio"> <input type="radio" name="category" value="toys"> toys</div>
-          <input type="text" id="product-category" class="width100 input is-small" placeholder="i.e. homegoods or apparel" value="homegoods">
+          <div class="radio-category div-radio"> <input type="radio" name="category" value="homegoods-v2" checked> homegoods</div>
+          <div class="radio-category div-radio"> <input type="radio" name="category" value="apparel-v2"> apparel</div>
+          <div class="radio-category div-radio"> <input type="radio" name="category" value="toys-v2"> toys</div>
+          <div class="radio-category div-radio"> <input type="radio" name="category" value="packagedgoods-v1"> packagedgoods</div>
+          <div class="radio-category div-radio"> <input type="radio" name="category" value="general-v1"> general</div>
+          <input type="text" id="product-category" class="width100 input is-small" placeholder="i.e. homegoods or apparel" value="homegoods-v2">
         </div>
         <div class="row">
           <label>Number of items
@@ -140,10 +142,10 @@
         <div class="row">
           <div>Endpoint</div>
           <div class="endpoint-radio div-radio">
-            <input type="radio" name="endpoint" value="beta" checked> beta
+            <input type="radio" name="endpoint" value="beta"> beta
           </div>
           <div class="endpoint-radio div-radio">
-            <input type="radio" name="endpoint" value="alpha"> alpha
+            <input type="radio" name="endpoint" value="prod" checked> prod
           </div>
           <input id="endpoint-text" type="text" class="endpoint-text input is-small" value="<%= endpoint %>">
         </div>
